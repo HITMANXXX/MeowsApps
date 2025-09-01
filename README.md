@@ -15,3 +15,9 @@ Pasos para instalar la aplicacion
 las librerias utilizadas son django para todo el proceso del backend y pillow que nos permite poder trabajar y cargar imagenes
 
 Aspectos a mejorar con el tiempo con respeto a lo visual , y poder dar un like/unlike en las publicaciones. Esto mejora mas la experiencia con el usuario. Otro aspecto a mejorar es que el usuario le permita cargar la imagen desde registro de su perfil, ya que cuando el crea su perfil , este crea una imagen por defecto y solo un superadmin la puede modificar. 
+
+si deseas crear un superuser
+- python manage.py createsuperuser
+
+ingresar localhost:8000/admin/
+Superadmin : Chanchitox  Contraseña: Abaco123456
