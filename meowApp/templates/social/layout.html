@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Meows Social</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>	
+		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+
+	<header class="main-head">
+		<nav class="main">
+			<a href="{% url 'feed' %}">
+				<img style="width: 30%;" src="{% static 'meows.png' %}">
+			</a></img>
+			<ul>
+
+				{% if request.user.is_authenticated %}
+
+					<li>
+
+						<form action="{% url 'logout' %}" method="post">
+
+							{% csrf_token %}
+							
+							<button type="submit">Cerrar Sesión</button>
+
+						</form>
+						
+					</li>
+
+				{% else %}
+
+					<li><a href="{% url 'register' %}"><b>Registro</b></a></li>
+					<li><a href="{% url 'login' %}"><b>Iniciar Sesion</b></a></li>
+
+				{% endif %}
+
+			</ul>
+		</nav>
+	</header>
+
+	<!-------------------------------------
+					Messages 
+	-------------------------------------->
+
+	{% if messages %}
+
+		{% for message in messages %}
+
+			<div class="notification {{ message.tags }}">
+
+				{{ message }}
+
+			</div>
+
+		{% endfor %}
+
+	{% endif %}
+
+	<!-------------------------------------
+					Navigation Bar 
+	-------------------------------------->
+	<div class="main">
+		
+		<nav class="second-nav">
+
+				<a class="feed" href="{% url 'feed' %}"><b>Inicio</b></a>
+
+			{% if request.user.is_authenticated %}
+
+				{% if not is_own_profile %}
+
+					<a class="profile" href="{% url 'profile' request.user.username %}"><b>Mi perfil</b></a>
+
+				{% endif %}
+
+				{% if is_own_profile %}
+
+					<a class="new" href="{% url 'post' %}"><b>Crear Maullido</b></a>
+					
+				{% endif %}	
+
+			{% endif %}
+
+		</nav>
+
+
+		{% block content %}
+
+		{% endblock content %}
+
+
+
+	</div>
+
+	<footer>
+		<div class="row">
+			<p>Meows Social Media<br>Hecha para: <a href="https://abacolatam.com/#/">Abaco Latam</a></p>
+		</div>
+	</footer>
+
+</body>
+</html>
